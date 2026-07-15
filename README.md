@@ -137,6 +137,8 @@ python scripts/run_matrix.py --execute
 Основной notebook: [notebooks/01_trigger_comparison.ipynb](notebooks/01_trigger_comparison.ipynb). Подробный протокол: [docs/experiment-plan.md](docs/experiment-plan.md).
 Проверенные версии локального окружения: [docs/tested-environment.md](docs/tested-environment.md).
 
+Первый CPU-пилот с реальным обучением: [results/pilot-10k-seed17/README.md](results/pilot-10k-seed17/README.md).
+
 ## Фиксированность фигурных триггеров
 
 Основной эксперимент использует фиксированные положение и ориентацию, чтобы сравнивать именно форму триггера. Рандомизация положения и поворота остается отдельным экспериментом на переносимость и не смешивается с основной таблицей.

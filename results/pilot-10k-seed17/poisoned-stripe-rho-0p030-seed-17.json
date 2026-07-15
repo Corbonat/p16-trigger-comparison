@@ -1,0 +1,204 @@
+{
+  "run": "poisoned-stripe-rho-0p030-seed-17",
+  "mode": "poisoned",
+  "trigger": "stripe",
+  "poison_fraction": 0.03,
+  "seed": 17,
+  "epochs": 12,
+  "poisoned_training_examples": 300,
+  "dataset_sizes": {"train": 10000, "validation": 2000, "test": 2000},
+  "dataset": "CIFAR10",
+  "target_class": 0,
+  "trigger_parameters": {
+    "width": 1,
+    "orientation": "horizontal",
+    "alpha": 0.7,
+    "position": "bottom"
+  },
+  "model": {
+    "name": "compact_cnn",
+    "channels": [
+      32,
+      64,
+      128
+    ],
+    "dropout": 0.25,
+    "epochs": 20,
+    "batch_size": 128,
+    "eval_batch_size": 256,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001
+  },
+  "model_parameters": 815018,
+  "device": "cpu",
+  "torch_version": "2.13.0+cpu",
+  "torch_threads": 8,
+  "class_names": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "loss": 1.8309481916427612,
+        "accuracy": 0.3208
+      },
+      "validation": {
+        "loss": 1.6697986888885499,
+        "accuracy": 0.3835
+      }
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "loss": 1.383879079914093,
+        "accuracy": 0.4871
+      },
+      "validation": {
+        "loss": 1.3345358619689942,
+        "accuracy": 0.521
+      }
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "loss": 1.1997190253257752,
+        "accuracy": 0.5619
+      },
+      "validation": {
+        "loss": 1.25242360496521,
+        "accuracy": 0.541
+      }
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "loss": 1.0530045013427733,
+        "accuracy": 0.6114
+      },
+      "validation": {
+        "loss": 1.2530562829971315,
+        "accuracy": 0.541
+      }
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "loss": 0.9215757407188415,
+        "accuracy": 0.6704
+      },
+      "validation": {
+        "loss": 1.0534841051101684,
+        "accuracy": 0.6195
+      }
+    },
+    {
+      "epoch": 6,
+      "train": {
+        "loss": 0.8134089254379272,
+        "accuracy": 0.7059
+      },
+      "validation": {
+        "loss": 1.0129780206680299,
+        "accuracy": 0.6355
+      }
+    },
+    {
+      "epoch": 7,
+      "train": {
+        "loss": 0.722440624332428,
+        "accuracy": 0.7392
+      },
+      "validation": {
+        "loss": 0.9503909206390381,
+        "accuracy": 0.6755
+      }
+    },
+    {
+      "epoch": 8,
+      "train": {
+        "loss": 0.6365658242225647,
+        "accuracy": 0.7739
+      },
+      "validation": {
+        "loss": 0.9097103171348572,
+        "accuracy": 0.685
+      }
+    },
+    {
+      "epoch": 9,
+      "train": {
+        "loss": 0.5513074621200561,
+        "accuracy": 0.8007
+      },
+      "validation": {
+        "loss": 1.104178554534912,
+        "accuracy": 0.648
+      }
+    },
+    {
+      "epoch": 10,
+      "train": {
+        "loss": 0.48241705141067504,
+        "accuracy": 0.8286
+      },
+      "validation": {
+        "loss": 0.9095287446975708,
+        "accuracy": 0.7135
+      }
+    },
+    {
+      "epoch": 11,
+      "train": {
+        "loss": 0.4177260413169861,
+        "accuracy": 0.8525
+      },
+      "validation": {
+        "loss": 0.9246595630645752,
+        "accuracy": 0.702
+      }
+    },
+    {
+      "epoch": 12,
+      "train": {
+        "loss": 0.3562122606754303,
+        "accuracy": 0.8715
+      },
+      "validation": {
+        "loss": 0.9443001461029052,
+        "accuracy": 0.705
+      }
+    }
+  ],
+  "metrics": {
+    "clean_accuracy": 0.7045,
+    "triggered_accuracy": 0.0955,
+    "asr": 0.9766666666666667,
+    "conditional_asr": 0.9705648369132857,
+    "per_source_class_asr": {
+      "1": 0.955,
+      "2": 0.995,
+      "3": 1.0,
+      "4": 0.99,
+      "5": 1.0,
+      "6": 0.94,
+      "7": 0.975,
+      "8": 0.995,
+      "9": 0.94
+    },
+    "target_margin_mean": 11.81026840209961,
+    "target_margin_median": 12.218017578125,
+    "evaluated_examples": 2000,
+    "asr_eligible_examples": 1800
+  },
+  "checkpoint": "checkpoints\\poisoned-stripe-rho-0p030-seed-17.pt"
+}

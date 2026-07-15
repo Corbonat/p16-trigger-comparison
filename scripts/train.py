@@ -43,6 +43,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data-root")
     parser.add_argument("--max-train-samples", type=int)
     parser.add_argument("--max-eval-samples", type=int)
+    parser.add_argument("--batch-size", type=int)
+    parser.add_argument("--eval-batch-size", type=int)
+    parser.add_argument("--torch-threads", type=int)
     parser.add_argument(
         "--smoke-test",
         action="store_true",
@@ -59,6 +62,21 @@ def main() -> None:
         if not data_root.is_absolute():
             data_root = ROOT / data_root
         config = replace(config, dataset=replace(config.dataset, root=str(data_root.resolve())))
+    if args.batch_size is not None or args.eval_batch_size is not None:
+        config = replace(
+            config,
+            model=replace(
+                config.model,
+                batch_size=(
+                    config.model.batch_size if args.batch_size is None else args.batch_size
+                ),
+                eval_batch_size=(
+                    config.model.eval_batch_size
+                    if args.eval_batch_size is None
+                    else args.eval_batch_size
+                ),
+            ),
+        )
     poison_fraction = 0.0 if args.mode == "clean" else args.poison_fraction
     if poison_fraction is None:
         raise SystemExit("--poison-fraction is required in poisoned mode")
@@ -67,6 +85,12 @@ def main() -> None:
     epochs = config.model.epochs if args.epochs is None else args.epochs
     if epochs < 1:
         raise SystemExit("--epochs must be positive")
+    if config.model.batch_size < 1 or config.model.eval_batch_size < 1:
+        raise SystemExit("batch sizes must be positive")
+    if args.torch_threads is not None:
+        if args.torch_threads < 1:
+            raise SystemExit("--torch-threads must be positive")
+        torch.set_num_threads(args.torch_threads)
 
     set_global_seed(args.seed)
     device = resolve_device(args.device)
@@ -97,7 +121,13 @@ def main() -> None:
                     "logit_shape": list(logits.shape),
                     "loss": float(loss.item()),
                     "model_parameters": count_trainable_parameters(model),
+                    "torch_threads": torch.get_num_threads(),
                     "poisoned_training_examples": int(len(data.poison_indices)),
+                    "dataset_sizes": {
+                        "train": len(data.train.dataset),
+                        "validation": len(data.validation.dataset),
+                        "test": len(data.test_clean.dataset),
+                    },
                     "batch_original_labels_shape": list(original_labels.shape),
                     "batch_trigger_flags_shape": list(trigger_flags.shape),
                     "batch_indices_shape": list(indices.shape),
@@ -133,6 +163,11 @@ def main() -> None:
         "seed": args.seed,
         "epochs": epochs,
         "poisoned_training_examples": int(len(data.poison_indices)),
+        "dataset_sizes": {
+            "train": len(data.train.dataset),
+            "validation": len(data.validation.dataset),
+            "test": len(data.test_clean.dataset),
+        },
         "dataset": config.dataset.name,
         "target_class": config.dataset.target_class,
         "trigger_parameters": config.trigger_parameters(args.trigger),
@@ -140,6 +175,7 @@ def main() -> None:
         "model_parameters": count_trainable_parameters(model),
         "device": str(device),
         "torch_version": torch.__version__,
+        "torch_threads": torch.get_num_threads(),
         "class_names": list(data.class_names),
         "history": history,
         "metrics": metrics,

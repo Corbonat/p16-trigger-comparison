@@ -1,0 +1,202 @@
+{
+  "run": "poisoned-position-rho-0p030-seed-17",
+  "mode": "poisoned",
+  "trigger": "position",
+  "poison_fraction": 0.03,
+  "seed": 17,
+  "epochs": 12,
+  "poisoned_training_examples": 300,
+  "dataset_sizes": {"train": 10000, "validation": 2000, "test": 2000},
+  "dataset": "CIFAR10",
+  "target_class": 0,
+  "trigger_parameters": {
+    "dx": 2,
+    "dy": 2
+  },
+  "model": {
+    "name": "compact_cnn",
+    "channels": [
+      32,
+      64,
+      128
+    ],
+    "dropout": 0.25,
+    "epochs": 20,
+    "batch_size": 128,
+    "eval_batch_size": 256,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001
+  },
+  "model_parameters": 815018,
+  "device": "cpu",
+  "torch_version": "2.13.0+cpu",
+  "torch_threads": 8,
+  "class_names": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "loss": 1.8610575157165528,
+        "accuracy": 0.312
+      },
+      "validation": {
+        "loss": 1.560506290435791,
+        "accuracy": 0.414
+      }
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "loss": 1.4713572576522826,
+        "accuracy": 0.4562
+      },
+      "validation": {
+        "loss": 1.2868412914276124,
+        "accuracy": 0.5285
+      }
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "loss": 1.2880233096122742,
+        "accuracy": 0.53
+      },
+      "validation": {
+        "loss": 1.2547781772613524,
+        "accuracy": 0.543
+      }
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "loss": 1.1262085805892945,
+        "accuracy": 0.5972
+      },
+      "validation": {
+        "loss": 1.073033977508545,
+        "accuracy": 0.6165
+      }
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "loss": 1.016079843044281,
+        "accuracy": 0.6422
+      },
+      "validation": {
+        "loss": 1.076892889022827,
+        "accuracy": 0.61
+      }
+    },
+    {
+      "epoch": 6,
+      "train": {
+        "loss": 0.8978683691978454,
+        "accuracy": 0.6807
+      },
+      "validation": {
+        "loss": 1.0861887063980102,
+        "accuracy": 0.6095
+      }
+    },
+    {
+      "epoch": 7,
+      "train": {
+        "loss": 0.8353349039077759,
+        "accuracy": 0.7015
+      },
+      "validation": {
+        "loss": 1.0668391542434692,
+        "accuracy": 0.632
+      }
+    },
+    {
+      "epoch": 8,
+      "train": {
+        "loss": 0.7451987314224243,
+        "accuracy": 0.7391
+      },
+      "validation": {
+        "loss": 0.9946712427139283,
+        "accuracy": 0.66
+      }
+    },
+    {
+      "epoch": 9,
+      "train": {
+        "loss": 0.6637353275299073,
+        "accuracy": 0.7664
+      },
+      "validation": {
+        "loss": 1.0934745893478393,
+        "accuracy": 0.6495
+      }
+    },
+    {
+      "epoch": 10,
+      "train": {
+        "loss": 0.58026734790802,
+        "accuracy": 0.7983
+      },
+      "validation": {
+        "loss": 0.9913406686782837,
+        "accuracy": 0.682
+      }
+    },
+    {
+      "epoch": 11,
+      "train": {
+        "loss": 0.49012766432762145,
+        "accuracy": 0.8268
+      },
+      "validation": {
+        "loss": 0.8921463828086853,
+        "accuracy": 0.709
+      }
+    },
+    {
+      "epoch": 12,
+      "train": {
+        "loss": 0.43632143139839175,
+        "accuracy": 0.8466
+      },
+      "validation": {
+        "loss": 0.931621485710144,
+        "accuracy": 0.7045
+      }
+    }
+  ],
+  "metrics": {
+    "clean_accuracy": 0.706,
+    "triggered_accuracy": 0.612,
+    "asr": 0.10611111111111111,
+    "conditional_asr": 0.07018927444794952,
+    "per_source_class_asr": {
+      "1": 0.135,
+      "2": 0.11,
+      "3": 0.075,
+      "4": 0.06,
+      "5": 0.06,
+      "6": 0.055,
+      "7": 0.155,
+      "8": 0.1,
+      "9": 0.205
+    },
+    "target_margin_mean": -2.735787868499756,
+    "target_margin_median": -2.5552563667297363,
+    "evaluated_examples": 2000,
+    "asr_eligible_examples": 1800
+  },
+  "checkpoint": "checkpoints\\poisoned-position-rho-0p030-seed-17.pt"
+}

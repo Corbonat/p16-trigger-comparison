@@ -33,19 +33,36 @@ def main() -> None:
         ("delta_accuracy", "Clean accuracy drop", "accuracy_drop_vs_poison_fraction.png"),
     ):
         figure, axis = plt.subplots(figsize=(8, 5))
-        for trigger, by_fraction in sorted(grouped.items()):
-            fractions = sorted(by_fraction)
+        all_fractions = sorted({fraction for values in grouped.values() for fraction in values})
+        if len(all_fractions) == 1:
+            fraction = all_fractions[0]
+            trigger_names = sorted(grouped)
             means = [
-                np.mean([float(row[metric]) for row in by_fraction[value]]) for value in fractions
+                np.mean([float(row[metric]) for row in grouped[trigger][fraction]])
+                for trigger in trigger_names
             ]
             deviations = [
-                np.std([float(row[metric]) for row in by_fraction[value]]) for value in fractions
+                np.std([float(row[metric]) for row in grouped[trigger][fraction]])
+                for trigger in trigger_names
             ]
-            axis.errorbar(fractions, means, yerr=deviations, marker="o", label=trigger)
-        axis.set_xlabel("Poison fraction")
+            axis.bar(trigger_names, means, yerr=deviations, capsize=4)
+            axis.set_xlabel(f"Trigger (poison fraction = {fraction:.1%})")
+        else:
+            for trigger, by_fraction in sorted(grouped.items()):
+                fractions = sorted(by_fraction)
+                means = [
+                    np.mean([float(row[metric]) for row in by_fraction[value]])
+                    for value in fractions
+                ]
+                deviations = [
+                    np.std([float(row[metric]) for row in by_fraction[value]])
+                    for value in fractions
+                ]
+                axis.errorbar(fractions, means, yerr=deviations, marker="o", label=trigger)
+            axis.set_xlabel("Poison fraction")
+            axis.legend()
         axis.set_ylabel(label)
         axis.grid(alpha=0.25)
-        axis.legend()
         figure.tight_layout()
         figure.savefig(artifacts / filename, dpi=180)
         plt.close(figure)

@@ -191,7 +191,7 @@ def fit(
         )
         row = {"epoch": epoch, "train": train_metrics, "validation": validation_metrics}
         history.append(row)
-        print(json.dumps(row, ensure_ascii=False))
+        print(json.dumps(row, ensure_ascii=False), flush=True)
         if validation_metrics["accuracy"] > best_validation_accuracy:
             best_validation_accuracy = validation_metrics["accuracy"]
             torch.save(
