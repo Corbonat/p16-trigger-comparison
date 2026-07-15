@@ -32,9 +32,7 @@ class TriggerTests(unittest.TestCase):
         np.testing.assert_array_equal(self.array, original)
 
     def test_patch_changes_only_requested_corner(self) -> None:
-        result = apply_trigger(
-            self.array, "patch", side=4, alpha=1.0, position="bottom_right"
-        )
+        result = apply_trigger(self.array, "patch", side=4, alpha=1.0, position="bottom_right")
         np.testing.assert_array_equal(result[:-4], self.array[:-4])
         np.testing.assert_array_equal(result[-4:, :-4], self.array[-4:, :-4])
         self.assertTrue(np.any(result[-4:, -4:] != self.array[-4:, -4:]))

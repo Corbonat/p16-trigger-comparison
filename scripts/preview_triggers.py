@@ -39,7 +39,9 @@ def main() -> None:
     ]
 
     label_height = 24
-    sheet = Image.new("RGB", (len(examples) * original.width, original.height + label_height), "white")
+    sheet = Image.new(
+        "RGB", (len(examples) * original.width, original.height + label_height), "white"
+    )
     draw = ImageDraw.Draw(sheet)
     font = ImageFont.load_default(size=15)
     for index, (label, image) in enumerate(examples):

@@ -77,7 +77,7 @@ def target_logit_margin(logits: np.ndarray, *, target_class: int) -> np.ndarray:
 
 
 def visibility_metrics(clean: np.ndarray, triggered: np.ndarray) -> dict[str, float]:
-    """Simple pixel-space visibility metrics for arrays in [0, 1] or uint8."""
+    """Pixel and perceptual visibility metrics for RGB arrays."""
     clean = np.asarray(clean)
     triggered = np.asarray(triggered)
     if clean.shape != triggered.shape:
@@ -93,9 +93,22 @@ def visibility_metrics(clean: np.ndarray, triggered: np.ndarray) -> dict[str, fl
 
     delta = triggered_float - clean_float
     mse = float(np.mean(delta**2))
-    return {
+    result = {
         "changed_fraction": float(np.mean(np.any(np.abs(delta) > 1e-8, axis=-1))),
         "mean_absolute_delta": float(np.mean(np.abs(delta))),
         "mse": mse,
         "psnr": math.inf if mse == 0.0 else float(10.0 * math.log10(1.0 / mse)),
     }
+    try:
+        from skimage.color import deltaE_ciede2000, rgb2lab
+        from skimage.metrics import structural_similarity
+
+        result["ssim"] = float(
+            structural_similarity(clean_float, triggered_float, channel_axis=-1, data_range=1.0)
+        )
+        result["mean_delta_e"] = float(
+            np.mean(deltaE_ciede2000(rgb2lab(clean_float), rgb2lab(triggered_float)))
+        )
+    except ImportError:
+        pass
+    return result

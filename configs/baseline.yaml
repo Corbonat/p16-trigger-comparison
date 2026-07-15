@@ -1,18 +1,30 @@
 experiment:
   name: cifar10_trigger_comparison
   seeds: [17, 29, 43]
+  output_dir: results/runs
+  checkpoint_dir: checkpoints
 
 dataset:
   name: CIFAR10
+  root: data/raw
   target_class: 0
   poison_fractions: [0.01, 0.03, 0.05]
   stratified_poisoning: true
+  validation_fraction: 0.1
+  split_seed: 2026
+  num_workers: 0
+  pin_memory: false
+  download: false
 
 model:
   name: compact_cnn
+  channels: [32, 64, 128]
+  dropout: 0.25
   epochs: 20
   batch_size: 128
+  eval_batch_size: 256
   learning_rate: 0.001
+  weight_decay: 0.0001
 
 triggers:
   patch:
