@@ -1,0 +1,39 @@
+experiment:
+  name: cifar10_trigger_comparison
+  seeds: [17, 29, 43]
+
+dataset:
+  name: CIFAR10
+  target_class: 0
+  poison_fractions: [0.01, 0.03, 0.05]
+  stratified_poisoning: true
+
+model:
+  name: compact_cnn
+  epochs: 20
+  batch_size: 128
+  learning_rate: 0.001
+
+triggers:
+  patch:
+    side: 4
+    alpha: 0.7
+    position: bottom_right
+  stripe:
+    width: 1
+    orientation: horizontal
+    alpha: 0.7
+    position: bottom
+  brightness:
+    delta: 0.08
+  position:
+    dx: 2
+    dy: 2
+  color:
+    hue_degrees: 16
+
+evaluation:
+  exclude_target_class_from_asr: true
+  report_conditional_asr: true
+  report_per_source_class_asr: true
+  report_target_logit_margin: true
