@@ -1,0 +1,201 @@
+{
+  "run": "poisoned-brightness-rho-0p030-seed-17",
+  "mode": "poisoned",
+  "trigger": "brightness",
+  "poison_fraction": 0.03,
+  "seed": 17,
+  "epochs": 12,
+  "poisoned_training_examples": 300,
+  "dataset_sizes": {"train": 10000, "validation": 2000, "test": 2000},
+  "dataset": "CIFAR10",
+  "target_class": 0,
+  "trigger_parameters": {
+    "delta": 0.15
+  },
+  "model": {
+    "name": "compact_cnn",
+    "channels": [
+      32,
+      64,
+      128
+    ],
+    "dropout": 0.25,
+    "epochs": 20,
+    "batch_size": 128,
+    "eval_batch_size": 256,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001
+  },
+  "model_parameters": 815018,
+  "device": "cpu",
+  "torch_version": "2.13.0+cpu",
+  "torch_threads": 8,
+  "class_names": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "loss": 1.8275575414657592,
+        "accuracy": 0.3231
+      },
+      "validation": {
+        "loss": 1.7909502601623535,
+        "accuracy": 0.352
+      }
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "loss": 1.435111778831482,
+        "accuracy": 0.469
+      },
+      "validation": {
+        "loss": 1.2946635084152223,
+        "accuracy": 0.5175
+      }
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "loss": 1.2682799634933473,
+        "accuracy": 0.5388
+      },
+      "validation": {
+        "loss": 1.288982898712158,
+        "accuracy": 0.53
+      }
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "loss": 1.1208267951011657,
+        "accuracy": 0.5917
+      },
+      "validation": {
+        "loss": 1.1272275686264037,
+        "accuracy": 0.5905
+      }
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "loss": 1.001645789718628,
+        "accuracy": 0.6416
+      },
+      "validation": {
+        "loss": 1.1757757406234741,
+        "accuracy": 0.5895
+      }
+    },
+    {
+      "epoch": 6,
+      "train": {
+        "loss": 0.8934712532043457,
+        "accuracy": 0.6766
+      },
+      "validation": {
+        "loss": 1.0655869655609131,
+        "accuracy": 0.628
+      }
+    },
+    {
+      "epoch": 7,
+      "train": {
+        "loss": 0.8171951757431031,
+        "accuracy": 0.7092
+      },
+      "validation": {
+        "loss": 0.9650512199401855,
+        "accuracy": 0.664
+      }
+    },
+    {
+      "epoch": 8,
+      "train": {
+        "loss": 0.722951895904541,
+        "accuracy": 0.7472
+      },
+      "validation": {
+        "loss": 0.9283007698059083,
+        "accuracy": 0.68
+      }
+    },
+    {
+      "epoch": 9,
+      "train": {
+        "loss": 0.6357757520675659,
+        "accuracy": 0.7759
+      },
+      "validation": {
+        "loss": 1.015070746421814,
+        "accuracy": 0.6625
+      }
+    },
+    {
+      "epoch": 10,
+      "train": {
+        "loss": 0.5461550224304199,
+        "accuracy": 0.812
+      },
+      "validation": {
+        "loss": 1.05035435962677,
+        "accuracy": 0.674
+      }
+    },
+    {
+      "epoch": 11,
+      "train": {
+        "loss": 0.4949629478931427,
+        "accuracy": 0.8259
+      },
+      "validation": {
+        "loss": 1.2323541250228882,
+        "accuracy": 0.64
+      }
+    },
+    {
+      "epoch": 12,
+      "train": {
+        "loss": 0.4483605018615723,
+        "accuracy": 0.8433
+      },
+      "validation": {
+        "loss": 1.137690263748169,
+        "accuracy": 0.6705
+      }
+    }
+  ],
+  "metrics": {
+    "clean_accuracy": 0.6745,
+    "triggered_accuracy": 0.528,
+    "asr": 0.32222222222222224,
+    "conditional_asr": 0.23450586264656617,
+    "per_source_class_asr": {
+      "1": 0.315,
+      "2": 0.55,
+      "3": 0.25,
+      "4": 0.29,
+      "5": 0.215,
+      "6": 0.395,
+      "7": 0.19,
+      "8": 0.375,
+      "9": 0.32
+    },
+    "target_margin_mean": -1.1405503749847412,
+    "target_margin_median": -1.024884581565857,
+    "evaluated_examples": 2000,
+    "asr_eligible_examples": 1800
+  },
+  "checkpoint": "checkpoints\\poisoned-brightness-rho-0p030-seed-17.pt"
+}

@@ -16,6 +16,9 @@ artifacts/*
 !artifacts/.gitkeep
 results/*
 !results/.gitkeep
+!results/README.md
+!results/pilot-10k-seed17/
+!results/pilot-10k-seed17/**
 
 .DS_Store
 Thumbs.db

@@ -15,14 +15,14 @@ dependencies = [
 
 [project.optional-dependencies]
 train = [
-    "jupyterlab",
     "matplotlib",
-    "pandas",
     "PyYAML",
     "scikit-image",
-    "seaborn",
     "torch",
     "torchvision",
+]
+notebook = [
+    "jupyterlab",
 ]
 dev = [
     "ruff",

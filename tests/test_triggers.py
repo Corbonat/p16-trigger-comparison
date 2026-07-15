@@ -20,7 +20,7 @@ class TriggerTests(unittest.TestCase):
         configurations = {
             "patch": {"side": 4},
             "stripe": {"width": 1},
-            "brightness": {"delta": 0.08},
+            "brightness": {"delta": 0.15},
             "position": {"dx": 2, "dy": 2},
             "color": {"hue_degrees": 16},
         }
@@ -32,18 +32,20 @@ class TriggerTests(unittest.TestCase):
         np.testing.assert_array_equal(self.array, original)
 
     def test_patch_changes_only_requested_corner(self) -> None:
-        result = apply_trigger(
-            self.array, "patch", side=4, alpha=1.0, position="bottom_right"
-        )
+        result = apply_trigger(self.array, "patch", side=4, alpha=1.0, position="bottom_right")
         np.testing.assert_array_equal(result[:-4], self.array[:-4])
         np.testing.assert_array_equal(result[-4:, :-4], self.array[-4:, :-4])
         self.assertTrue(np.any(result[-4:, -4:] != self.array[-4:, -4:]))
 
     def test_pil_input_returns_pil_image(self) -> None:
         image = Image.fromarray(self.array, mode="RGB")
-        result = apply_trigger(image, "brightness", delta=0.08)
+        result = apply_trigger(image, "brightness", delta=0.15)
         self.assertIsInstance(result, Image.Image)
         self.assertEqual(result.size, image.size)
+
+    def test_default_brightness_adds_fifteen_percent_of_pixel_range(self) -> None:
+        result = apply_trigger(self.array, "brightness")
+        np.testing.assert_array_equal(result, np.full_like(self.array, 138))
 
     def test_unknown_trigger_is_rejected(self) -> None:
         with self.assertRaises(ValueError):

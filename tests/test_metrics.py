@@ -27,15 +27,15 @@ class MetricTests(unittest.TestCase):
         y_true = np.array([1, 2, 3, 0])
         y_clean = np.array([1, 9, 3, 0])
         y_triggered = np.array([0, 0, 3, 0])
-        result = conditional_attack_success_rate(
-            y_true, y_clean, y_triggered, target_class=0
-        )
+        result = conditional_attack_success_rate(y_true, y_clean, y_triggered, target_class=0)
         self.assertEqual(result, 0.5)
 
     def test_per_class_asr(self) -> None:
         y_true = np.array([1, 1, 2, 2, 0])
         y_triggered = np.array([0, 1, 0, 0, 0])
-        self.assertEqual(per_source_class_asr(y_true, y_triggered, target_class=0), {1: 0.5, 2: 1.0})
+        self.assertEqual(
+            per_source_class_asr(y_true, y_triggered, target_class=0), {1: 0.5, 2: 1.0}
+        )
 
     def test_target_logit_margin(self) -> None:
         logits = np.array([[1.0, 3.0, 2.0], [4.0, 1.0, 5.0]])
