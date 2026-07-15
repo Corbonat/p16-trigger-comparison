@@ -25,7 +25,7 @@ triggers:
     alpha: 0.7
     position: bottom
   brightness:
-    delta: 0.08
+    delta: 0.15
   position:
     dx: 2
     dy: 2

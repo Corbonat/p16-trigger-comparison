@@ -134,7 +134,7 @@ def add_stripe(
 
 
 def change_brightness(
-    image: Image.Image | np.ndarray, *, delta: float = 0.08
+    image: Image.Image | np.ndarray, *, delta: float = 0.15
 ) -> Image.Image | np.ndarray:
     """Apply an additive exposure change and clip to the valid image range."""
     array, metadata = _to_unit_float(image)

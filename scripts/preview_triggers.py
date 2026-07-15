@@ -33,7 +33,7 @@ def main() -> None:
         ("clean", original),
         ("patch", apply_trigger(original, "patch", side=12, alpha=0.75)),
         ("stripe", apply_trigger(original, "stripe", width=4, alpha=0.7)),
-        ("brightness", apply_trigger(original, "brightness", delta=0.08)),
+        ("brightness", apply_trigger(original, "brightness", delta=0.15)),
         ("position", apply_trigger(original, "position", dx=6, dy=6)),
         ("color", apply_trigger(original, "color", hue_degrees=22)),
     ]
